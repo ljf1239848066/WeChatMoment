@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.lxzh123.wechatmoment.view.CustomLinkTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_comment_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="top"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:autoLink="all"
+    android:clickable="true"
+    android:linksClickable="true"
+    android:textColor="@color/tweet_text_content_color"
+    android:textColorLink="#465683"
+    android:textColorHighlight="@android:color/holo_blue_light"
+    android:textSize="@dimen/tweet_comment_text_size"
+    android:background="@drawable/comment_list_item_bg"
+    app:linkClickTextForeColor="#465683"
+    app:linkClickTextBackColor="#B1B4BB"/>
