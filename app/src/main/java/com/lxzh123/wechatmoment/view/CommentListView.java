@@ -15,19 +15,20 @@ import com.lxzh123.wechatmoment.R;
  */
 public class CommentListView extends ListView {
     private Context context;
+
     public CommentListView(Context context) {
         super(context);
-        this.context=context;
+        this.context = context;
     }
 
     public CommentListView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context=context;
+        this.context = context;
     }
 
     public CommentListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.context=context;
+        this.context = context;
     }
 
     @Override
@@ -37,6 +38,7 @@ public class CommentListView extends ListView {
 
     /**
      * 重新计算列表所有元素的高度
+     *
      * @param widthMeasureSpec
      * @param heightMeasureSpec
      */

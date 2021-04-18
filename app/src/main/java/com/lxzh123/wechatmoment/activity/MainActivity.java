@@ -2,32 +2,31 @@ package com.lxzh123.wechatmoment.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.lxzh123.wechatmoment.R;
-import com.lxzh123.wechatmoment.view.CustomFragmentPagerAdapter;
+import com.lxzh123.wechatmoment.adapter.CustomFragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.greenrobot.eventbus.*;
-
 /**
  * description: 微信主界面
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private FrameLayout frameLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private final int TAB_COUNT=4;
+    private final int TAB_COUNT = 4;
     private List<Fragment> tabFracments;
 
     @Override
@@ -40,25 +39,24 @@ public class MainActivity extends AppCompatActivity{
     /**
      * initialize view, findView, bind event listener
      */
-    private void initView(){
-        tabLayout=(TabLayout)findViewById(R.id.main_tabs);
-        viewPager =(ViewPager)findViewById(R.id.tb_content);
+    private void initView() {
+        tabLayout = findViewById(R.id.main_tabs);
+        viewPager = findViewById(R.id.tb_content);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setSelectedTabIndicatorHeight(0);
         tabLayout.setupWithViewPager(viewPager);
-        ViewCompat.setElevation(tabLayout,0);
+        ViewCompat.setElevation(tabLayout, 0);
 
 
-        tabFracments=new ArrayList<>();
+        tabFracments = new ArrayList<>();
         tabFracments.add(new ChatFragment());//android.R.id.ic_menu_start_conversation
         tabFracments.add(new ContactFragment());//android.R.id.ic_menu_friendslist
         tabFracments.add(new FindFragment());//android.R.id.ic_menu_compass
         tabFracments.add(new MeFragment());//android.R.id.ic_contact_picture
 
-        CustomFragmentPagerAdapter pagerAdapter=new CustomFragmentPagerAdapter(getSupportFragmentManager(),tabFracments);
+        CustomFragmentPagerAdapter pagerAdapter = new CustomFragmentPagerAdapter(getSupportFragmentManager(), tabFracments);
         viewPager.setAdapter(pagerAdapter);
-
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -80,6 +78,6 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.getTabAt(3).setText(R.string.main_tab_me).setIcon(R.drawable.main_tab_me_bg);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.main_tab_bar_pressed));
         tabLayout.setTabTextColors(R.color.main_tab_bar_normal, Color.parseColor("#1FA015"));
-        tabLayout.setTabTextColors(getResources().getColor(R.color.main_tab_bar_normal),getResources().getColor(R.color.main_tab_bar_pressed) );
+        tabLayout.setTabTextColors(getResources().getColor(R.color.main_tab_bar_normal), getResources().getColor(R.color.main_tab_bar_pressed));
     }
 }

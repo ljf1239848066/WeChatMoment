@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="max" format="integer"/>
+    <attr name="min" format="integer"/>
+    <attr name="value" format="integer"/>
+    <attr name="progress" format="integer"/>
+    <attr name="text" format="string"/>
+    <attr name="title" format="string"/>
+    <attr name="textSize"/>
+    <attr name="foreColor" format="color"/>
+    <attr name="backColor" format="color"/>
+    <attr name="transBackColor" format="color"/>
+    <attr name="highlight" format="boolean"/>
+    <attr name="icon" format="reference"/>
+
+    <attr name="colorAccentDisable" format="color"/>
+    <attr name="colorBackground" format="color"/>
+    <attr name="colorForeground" format="color"/>
+    <attr name="colorForegroundTitle" format="color"/>
+    <attr name="colorForegroundTitleRevert" format="color"/>
+    <attr name="colorForegroundHighlight" format="color"/>
+    <attr name="colorBackgroundRevert" format="color"/>
+    <attr name="colorForegroundRevert" format="color"/>
+    <attr name="colorLinearLayoutDivider" format="color"/>
+    <attr name="colorOverflowButton" format="color"/>
+
+    <attr name="colorIndicatorRightBack" format="color"/>
+    <attr name="colorIndicatorRightFore" format="color"/>
+    <attr name="colorIndicatorWrongBack" format="color"/>
+    <attr name="colorIndicatorWrongFore" format="color"/>
+    <attr name="colorIndicatorNotBack" format="color"/>
+    <attr name="colorIndicatorNotFore" format="color"/>
+    <attr name="colorIndicatorNotBorder" format="color"/>
+
+    <attr name="actionBarStyle" format="reference"/>
+    <attr name="actionBarPopupStyle" format="reference"/>
 
     <declare-styleable name="CustomLinkTextView">
         <attr name="linkClickTextForeColor" format="color" />

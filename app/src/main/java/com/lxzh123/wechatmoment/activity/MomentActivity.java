@@ -1,96 +1,182 @@
 package com.lxzh123.wechatmoment.activity;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.*;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.lxzh123.wechatmoment.*;
-import com.lxzh123.wechatmoment.view.TweetAdapter;
+import com.github.jdsjlzx.decoration.DividerDecoration;
+import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.github.jdsjlzx.recyclerview.ProgressStyle;
+import com.lxzh123.wechatmoment.R;
+import com.lxzh123.wechatmoment.adapter.BaseRecyclerAdapter;
+import com.lxzh123.wechatmoment.loader.TweetLoader;
+import com.lxzh123.wechatmoment.model.BaseBean;
+import com.lxzh123.wechatmoment.model.Tweet;
+import com.lxzh123.wechatmoment.utils.LogUtils;
+import com.lxzh123.wechatmoment.utils.WindowUtils;
+import com.lxzh123.wechatmoment.view.ClickLoadingFooter;
+import com.lxzh123.wechatmoment.view.MomentsRefreshHeader;
+
+import java.util.List;
 
 
 /**
  * description: 微信朋友圈
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class MomentActivity extends AppCompatActivity {
+public class MomentActivity extends BaseTitleActivity implements TweetLoader.TweetLoaderListener {
+    private final static int INIT_TWEET_FINISHED = 0;
 
-    private TweetAdapter tweetAdapter;
-    private ListView lvTweetList;
+    private View headView;
+    private BaseRecyclerAdapter tweetAdapter;
+    private LRecyclerViewAdapter mLRecyclerViewAdapter;
+    private LRecyclerView rvTweetList;
     private ImageButton ibProfile;
-    private final static int INIT_TWEET_FINISHED=0;
+    private TweetLoader mLoader;
+
+    /** 已经获取到多少条数据了 */
+    private int mCurrentCounter = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_moment);
-
-        Button btnBack = (Button) findViewById(R.id.btn_title_back);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MomentActivity.this.finish();
-            }
-        });
-
-        lvTweetList = (ListView) findViewById(R.id.lv_tweet_list);
-
-        tweetAdapter = new TweetAdapter(getBaseContext());
-        lvTweetList.setAdapter(tweetAdapter);
-        lvTweetList.setDividerHeight(1);
-        lvTweetList.addHeaderView(getLayoutInflater().inflate(R.layout.layout_moment_header, null));
-
-        ibProfile = (ImageButton) findViewById(R.id.iv_self_portrait);
-
-        ibProfile.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getBaseContext(),"Hello!",Toast.LENGTH_SHORT).show();
-            }
-        });
-
+    protected int getLayoutId() {
+        return R.layout.activity_moment;
     }
+
+    @Override
+    protected void initView() {
+        super.initView();
+        WindowUtils.setStatusBarTransparent(getWindow());
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        rvTweetList = findViewById(R.id.rv_tweet_list);
+        headView = getLayoutInflater().inflate(R.layout.layout_moment_header, null);
+        ibProfile = headView.findViewById(R.id.iv_self_portrait);
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        setCustomTitle("");
+
+        rvTweetList.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        rvTweetList.setRefreshHeader(new MomentsRefreshHeader(this));
+
+        tweetAdapter = new BaseRecyclerAdapter(this, null);
+        mLRecyclerViewAdapter = new LRecyclerViewAdapter(tweetAdapter);
+        rvTweetList.setAdapter(mLRecyclerViewAdapter);
+
+        DividerDecoration divider = new DividerDecoration.Builder(this).setHeight(R.dimen.default_divider_height)
+                .setPadding(R.dimen.default_divider_padding)
+                .setColorResource(R.color.split)
+                .build();
+
+        //mRecyclerView.setHasFixedSize(true);
+        rvTweetList.addItemDecoration(divider);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvTweetList.setLayoutManager(new LinearLayoutManager(this));
+
+        rvTweetList.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
+        rvTweetList.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
+        rvTweetList.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+
+        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
+        rvTweetList.setLoadMoreEnabled(true);
+
+        //设置头部加载颜色
+        rvTweetList.setHeaderViewColor(R.color.colorAccent, R.color.dark, android.R.color.white);
+        //设置底部加载颜色
+//        rvTweetList.setFooterViewColor(R.color.colorAccent, R.color.dark, android.R.color.white);
+        //设置底部加载文字提示
+//        rvTweetList.setFooterViewHint("拼命加载中", "我是有底线的", "网络不给力啊，点击再试一次吧");
+        ClickLoadingFooter loadingFooter = new ClickLoadingFooter(this);
+        rvTweetList.setLoadMoreFooter(loadingFooter, true);
+        refresh();
+    }
+
+    @Override
+    protected void initAction() {
+        super.initAction();
+        ibProfile.setOnClickListener(v -> {
+            Toast.makeText(getBaseContext(), "Hello!", Toast.LENGTH_SHORT).show();
+        });
+        rvTweetList.setOnRefreshListener(() -> {
+            LogUtils.d("onRefresh");
+            mCurrentCounter = 0;
+            refresh();
+        });
+        rvTweetList.setOnLoadMoreListener(() -> {
+            LogUtils.d("onLoadMore mCurrentCounter:" + mCurrentCounter);
+            if (mLoader.hasMore(mCurrentCounter)) {
+                LogUtils.d("onLoadMore 1");
+                loadMore();
+            } else {
+                LogUtils.d("onLoadMore 2");
+                rvTweetList.setNoMore(true);
+            }
+        });
+    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
-        EventBus.getDefault().post(handler);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        EventBus.getDefault().unregister(this);
     }
 
-//    public void onEventMainThread(Object obj) {}
-//
-//    public void onEventPostThread(Object obj) {}
-//
-//    public void onEventBackgroundThread(Object obj) {}
-//
-//    public void onEventAsync(Object obj) {}
-
-    @Subscribe(threadMode = ThreadMode.ASYNC)
-    public void onMessageEvent(Object obj) {
-        tweetAdapter.InitData();
-//        handler.sendEmptyMessage(INIT_TWEET_FINISHED);
-        ((Handler)obj).sendEmptyMessage(INIT_TWEET_FINISHED);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
-    private Handler handler=new Handler(){
+    private void refresh() {
+        if (mLoader == null) {
+            mLoader = new TweetLoader();
+        }
+        LogUtils.d("refresh start asyncLoadData");
+        mLoader.asyncLoadData(this);
+    }
+
+    private void loadMore() {
+        if (mLoader == null) {
+            mLoader = new TweetLoader();
+            mLoader.asyncLoadData(this);
+        } else {
+            LogUtils.d("loadMore start asyncLoadMore cnt:" + tweetAdapter.getItemCount());
+            mLoader.asyncLoadMore(tweetAdapter.getItemCount(), this);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(List<Tweet> tweets) {
+        Message message = handler.obtainMessage(INIT_TWEET_FINISHED);
+        message.obj = tweets;
+        message.sendToTarget();
+        LogUtils.d("onLoadFinished tweets:" + tweets.size());
+    }
+
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(msg.what==INIT_TWEET_FINISHED){
+            if (msg.what == INIT_TWEET_FINISHED) {
+                LogUtils.d("handleMessage msg.obj:" + msg.obj);
+                List<BaseBean> tweets = (List<BaseBean>)msg.obj;
+                mCurrentCounter = tweets.size();
+                tweetAdapter.setItems(tweets);
                 tweetAdapter.notifyDataSetChanged();
+                rvTweetList.refreshComplete(tweets.size());
+//                rvTweetList.setAdapter(mLRecyclerViewAdapter);
             }
             super.handleMessage(msg);
         }

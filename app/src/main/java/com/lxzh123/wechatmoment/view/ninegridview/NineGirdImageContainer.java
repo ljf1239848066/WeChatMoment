@@ -9,36 +9,31 @@ import com.lxzh123.wechatmoment.R;
 
 /**
  * description: 九宫格单元格图片视图容器
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class NineGirdImageContainer extends FrameLayout
-{
+public class NineGirdImageContainer extends FrameLayout {
     private NineGridImageView mImageView;
     private int mImageWidth, mImageHeight;
     private boolean mAttached;
 
-    public NineGirdImageContainer(Context context)
-    {
+    public NineGirdImageContainer(Context context) {
         super(context);
         init(context, null);
     }
 
-    public NineGirdImageContainer(Context context, AttributeSet attrs)
-    {
+    public NineGirdImageContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs)
-    {
+    private void init(Context context, AttributeSet attrs) {
         setWillNotDraw(false);
         inflate(context, R.layout.layout_ninegrid_image, this);
         mImageView = (NineGridImageView) findViewById(R.id.img_ninegrid_imagecontainer_content);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mImageWidth = MeasureSpec.getSize(widthMeasureSpec);
         mImageHeight = MeasureSpec.getSize(heightMeasureSpec);
@@ -65,25 +60,22 @@ public class NineGirdImageContainer extends FrameLayout
         mAttached = false;
     }
 
-    public boolean getAttached(){
+    public boolean getAttached() {
         return mAttached;
     }
 
-    public int getImageWidth()
-    {
+    public int getImageWidth() {
         return mImageWidth;
     }
 
-    public int getImageHeight()
-    {
+    public int getImageHeight() {
         return mImageHeight;
     }
 
     /**
      * Set scantype of imageView
      */
-    private void setScanType(ImageView.ScaleType scanType)
-    {
+    private void setScanType(ImageView.ScaleType scanType) {
         if (mImageView != null)
             mImageView.setScaleType(scanType);
     }
@@ -91,8 +83,7 @@ public class NineGirdImageContainer extends FrameLayout
     /**
      * Get imageView object
      */
-    public ImageView getImageView()
-    {
+    public ImageView getImageView() {
         return mImageView;
     }
 

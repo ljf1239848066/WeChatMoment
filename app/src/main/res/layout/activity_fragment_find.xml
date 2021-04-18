@@ -3,17 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EBEBEB"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
 
     <RelativeLayout
         android:id="@+id/re_friends"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="60dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_friends"
@@ -48,11 +47,11 @@
     <RelativeLayout
         android:id="@+id/re_erweima"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_erweima"
@@ -84,10 +83,10 @@
     <RelativeLayout
         android:id="@+id/re_yaoyiyao"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_yaoyiyao"
@@ -112,11 +111,11 @@
     <RelativeLayout
         android:id="@+id/re_fujin"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_fujin"
@@ -148,10 +147,10 @@
     <RelativeLayout
         android:id="@+id/re_piaoliuping"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_piaoliuping"
@@ -176,11 +175,11 @@
     <RelativeLayout
         android:id="@+id/re_gouwu"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_gouwu"
@@ -212,10 +211,10 @@
     <RelativeLayout
         android:id="@+id/re_youxi"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="60dp"
         android:background="@drawable/btn_list_item_bg"
         android:clickable="true"
-        android:paddingLeft="12dp" >
+        android:paddingLeft="12dp">
 
         <ImageView
             android:id="@+id/iv_youxi"

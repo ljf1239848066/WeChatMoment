@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:id="@+id/app_bar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:theme="@style/AppTheme.AppBarOverlay">-->
+
+    <!--        <androidx.appcompat.widget.Toolbar-->
+    <!--            android:id="@+id/toolbar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="?attr/actionBarSize"-->
+    <!--            android:theme="?attr/actionBarStyle"-->
+    <!--            app:contentInsetLeft="0dp"-->
+    <!--            app:contentInsetStart="0dp"-->
+    <!--            app:layout_collapseMode="pin"-->
+    <!--            app:popupTheme="@style/AppTheme.PopupOverlay">-->
+
+    <!--            <include layout="@layout/layout_common_title" />-->
+
+    <!--        </androidx.appcompat.widget.Toolbar>-->
+
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/rv_tweet_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/title_bar_blue"
-            android:fitsSystemWindows="true"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp"
-            app:layout_collapseMode="pin">
+    </com.github.jdsjlzx.recyclerview.LRecyclerView>
 
-            <include layout="@layout/layout_common_title" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
-        </android.support.v7.widget.Toolbar>
+        <include layout="@layout/layout_common_title" />
+    </RelativeLayout>
 
-        <ListView
-            android:id="@+id/lv_tweet_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:cacheColorHint="#00000000"
-            android:drawSelectorOnTop="false"
-            android:headerDividersEnabled="false"
-            android:fadingEdge="none"
-            android:focusable="false"
-            android:focusableInTouchMode="true"
-            android:scrollbars="vertical">
-
-        </ListView>
-
-    </android.support.design.widget.AppBarLayout>
-
-</LinearLayout>
+</RelativeLayout>

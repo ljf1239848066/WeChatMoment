@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="FullScreenTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
-
-    </style>
-
     <declare-styleable name="NineGridView">
         <attr name="sapce_size" format="dimension"/>
         <attr name="single_image_size" format="dimension"/>
@@ -22,6 +12,5 @@
         <item name="android:textSize">@dimen/main_tab_text_size</item>
         <item name="android:padding">0dp</item>
     </style>
-
 
 </resources>

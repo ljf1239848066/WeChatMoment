@@ -2,7 +2,7 @@ package com.lxzh123.wechatmoment.model;
 
 /**
  * description: 朋友圈用户信息
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
 public class User {
     /**
@@ -26,14 +26,14 @@ public class User {
         this.username = "";
         this.nick = "";
         this.avatar = "";
-        this.profile ="";
+        this.profile = "";
     }
 
     public User(String username, String nick, String avatar) {
         this.username = username;
         this.nick = nick;
         this.avatar = avatar;
-        this.profile ="";
+        this.profile = "";
     }
 
     public User(String username, String nick, String avatar, String profile) {

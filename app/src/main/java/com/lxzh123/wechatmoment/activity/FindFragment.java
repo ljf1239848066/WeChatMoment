@@ -2,13 +2,15 @@ package com.lxzh123.wechatmoment.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import androidx.fragment.app.Fragment;
+
 import com.lxzh123.wechatmoment.R;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FindFragment#newInstance} factory method to
@@ -60,12 +62,12 @@ public class FindFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.activity_fragment_find, container, false);
-        RelativeLayout rlFriends=(RelativeLayout)view.findViewById(R.id.re_friends);
+        View view = inflater.inflate(R.layout.activity_fragment_find, container, false);
+        RelativeLayout rlFriends = (RelativeLayout) view.findViewById(R.id.re_friends);
         rlFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(),MomentActivity.class);
+                Intent intent = new Intent(getActivity(), MomentActivity.class);
                 startActivity(intent);
             }
         });

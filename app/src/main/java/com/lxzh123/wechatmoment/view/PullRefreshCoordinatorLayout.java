@@ -3,20 +3,21 @@ package com.lxzh123.wechatmoment.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.design.widget.CoordinatorLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 import com.lxzh123.wechatmoment.R;
-import com.lxzh123.wechatmoment.utils.ViewUtil;
+import com.lxzh123.wechatmoment.utils.ViewUtils;
 
 /**
  * description: 自定义上拉加载下拉刷新View
  * TODO:        待完善功能
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
 public class PullRefreshCoordinatorLayout extends ListView {
 
@@ -37,17 +38,17 @@ public class PullRefreshCoordinatorLayout extends ListView {
 
     public PullRefreshCoordinatorLayout(Context context) {
         super(context);
-        init(context,null, 0);
+        init(context, null, 0);
     }
 
     public PullRefreshCoordinatorLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs, 0);
+        init(context, attrs, 0);
     }
 
     public PullRefreshCoordinatorLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context,attrs, defStyle);
+        init(context, attrs, defStyle);
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
@@ -61,16 +62,16 @@ public class PullRefreshCoordinatorLayout extends ListView {
         // Update TextPaint and text measurements from attributes
         invalidateTextPaintAndMeasurements();
 
-        ViewUtil vu=new ViewUtil(this);
-        startPositionY= vu.getTop();
-        isRefreshEnable=false;
+        ViewUtils vu = new ViewUtils(this);
+        startPositionY = vu.getTop();
+        isRefreshEnable = false;
 
-        circleProgresView=new ImageView(context);
+        circleProgresView = new ImageView(context);
         circleProgresView.setImageResource(R.drawable.find_friends);
-        CoordinatorLayout.LayoutParams lp=new CoordinatorLayout.LayoutParams(50,50);
-        lp.topMargin=50;
-        lp.leftMargin=50;
-        this.addView(circleProgresView,lp);
+        CoordinatorLayout.LayoutParams lp = new CoordinatorLayout.LayoutParams(50, 50);
+        lp.topMargin = 50;
+        lp.leftMargin = 50;
+        this.addView(circleProgresView, lp);
     }
 
     private void invalidateTextPaintAndMeasurements() {
@@ -80,18 +81,18 @@ public class PullRefreshCoordinatorLayout extends ListView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if(isRefreshEnable){
-            switch(ev.getAction()){
+        if (isRefreshEnable) {
+            switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    actionDownPosition=(int)ev.getY();
+                    actionDownPosition = (int) ev.getY();
                     break;
                 case MotionEvent.ACTION_UP:
-                    actionDownPosition=-1;
+                    actionDownPosition = -1;
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    int tmpY=(int)ev.getY();
-                    int deltaY=(tmpY-actionDownPosition)/RATIO;
-                    if(deltaY>refreshEnableDistance){
+                    int tmpY = (int) ev.getY();
+                    int deltaY = (tmpY - actionDownPosition) / RATIO;
+                    if (deltaY > refreshEnableDistance) {
 
                     }
                     break;
@@ -119,10 +120,10 @@ public class PullRefreshCoordinatorLayout extends ListView {
      *
      * @param distance the minimum distance to use.
      */
-    public void setRefreshEnableDistance(int distance){
-        if(distance<0){
+    public void setRefreshEnableDistance(int distance) {
+        if (distance < 0) {
             return;
         }
-        this.refreshEnableDistance=distance;
+        this.refreshEnableDistance = distance;
     }
 }

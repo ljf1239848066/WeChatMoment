@@ -21,4 +21,5 @@
 
     <string name="tweet_hint_nickname">用户昵称</string>
     <string name="tweet_hint_text_content_long">这是一条测试用朋友圈，内容也没有啥意义，仅仅用于查看显示状态与布局效果，内容很长很长很长，因为我在这里塞了一些没用的文字，很啰嗦很啰嗦，虽然不知道写些什么好，但还是勉强凑一些字数，比如巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻</string>
+    <string name="title_activity_personal_info">个人信息</string>
 </resources>

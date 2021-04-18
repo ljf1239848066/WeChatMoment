@@ -5,10 +5,9 @@ import android.widget.ImageView;
 
 /**
  * description: 九宫格单元格图片加载器
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public interface INineGridImageLoader
-{
+public interface INineGridImageLoader {
     void displayNineGridImage(Context context, String url, ImageView imageView, int position);
 
     void displayNineGridImage(Context context, String url, ImageView imageView,

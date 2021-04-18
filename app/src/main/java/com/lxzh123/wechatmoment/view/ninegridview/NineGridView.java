@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lxzh123.wechatmoment.R;
+import com.lxzh123.wechatmoment.common.Constants;
 import com.lxzh123.wechatmoment.utils.Common;
 
 import java.util.ArrayList;
@@ -20,11 +21,10 @@ import java.util.List;
 
 /**
  * description: 九宫格GridView
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class NineGridView extends ViewGroup
-{
-    private final static String TAG="NineGridView";
+public class NineGridView extends ViewGroup {
+    private final static String TAG = "NineGridView";
     //Size of imageview while there has only one image
     private int mSingleImageSize = 100;
     //Aspect ratio of only one imageview
@@ -48,30 +48,25 @@ public class NineGridView extends ViewGroup
     //layout max width
     private int mLayoutMaxWidth;
 
-    public NineGridView(Context context)
-    {
+    public NineGridView(Context context) {
         super(context);
         initParams(context, null);
     }
 
-    public NineGridView(Context context, AttributeSet attrs)
-    {
+    public NineGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initParams(context, attrs);
     }
 
-    private void initParams(Context context, AttributeSet attrs)
-    {
+    private void initParams(Context context, AttributeSet attrs) {
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         mSingleImageSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mSingleImageSize, dm);
         mSpaceSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mSpaceSize, dm);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.NineGridView);
-        if (ta != null)
-        {
+        if (ta != null) {
             int count = ta.getIndexCount();
-            for (int i = 0; i < count; i++)
-            {
+            for (int i = 0; i < count; i++) {
                 int index = ta.getIndex(i);
                 if (index == R.styleable.NineGridView_sapce_size)
                     mSpaceSize = ta.getDimensionPixelSize(index, mSpaceSize);
@@ -89,16 +84,15 @@ public class NineGridView extends ViewGroup
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int resWidth = 0, resHeight = 0;
 
         //Measure width
         int measureWidth = MeasureSpec.getSize(widthMeasureSpec);
-        if(measureWidth>mLayoutMaxWidth&&mLayoutMaxWidth>0){
-            measureWidth=mLayoutMaxWidth;
+        if (measureWidth > mLayoutMaxWidth && mLayoutMaxWidth > 0) {
+            measureWidth = mLayoutMaxWidth;
         }
 
         //get available width
@@ -106,11 +100,9 @@ public class NineGridView extends ViewGroup
 
         //If is non-edit mode,the size of childview depends on data size
         int dataCount = mDataList.size();
-        if (mDataList != null && dataCount > 0)
-        {
-            if (dataCount == 1)
-            {
-                totalWidth = (totalWidth-mSpaceSize*2)/3*2+mSpaceSize;
+        if (mDataList != null && dataCount > 0) {
+            if (dataCount == 1) {
+                totalWidth = (totalWidth - mSpaceSize * 2) / 3 * 2 + mSpaceSize;
                 mImageWidth = totalWidth;
                 mImageHeight = (int) (mImageWidth / mSingleImageRatio);
 
@@ -125,8 +117,7 @@ public class NineGridView extends ViewGroup
 //                }
                 resWidth = mImageWidth + getPaddingLeft() + getPaddingRight();
                 resHeight = mImageHeight + getPaddingTop() + getPaddingBottom();
-            } else
-            {
+            } else {
                 mImageWidth = mImageHeight = (totalWidth - (mColumnCount - 1) * mSpaceSize) / mColumnCount;
                 if (dataCount < mColumnCount)
                     resWidth = mImageWidth * dataCount + (dataCount - 1) * mSpaceSize + getPaddingLeft() + getPaddingRight();
@@ -140,8 +131,7 @@ public class NineGridView extends ViewGroup
 
         //Measure child view size
         int childrenCount = getChildCount();
-        for (int index = 0; index < childrenCount; index++)
-        {
+        for (int index = 0; index < childrenCount; index++) {
             View childView = getChildAt(index);
             int childWidth = mImageWidth;
             int childHeight = mImageHeight;
@@ -153,25 +143,22 @@ public class NineGridView extends ViewGroup
     }
 
     @Override
-    protected void onLayout(boolean b, int i, int i1, int i2, int i3)
-    {
+    protected void onLayout(boolean b, int i, int i1, int i2, int i3) {
         int childCount = getChildCount();
         int paddingLeft = getPaddingLeft();
         int paddingTop = getPaddingTop();
-        if(childCount==1){
+        if (childCount == 1) {
             int left = paddingLeft;
             int top = paddingTop;
             int right = left + mImageWidth;
             int bottom = top + mImageHeight;
-            Log.i(TAG,String.format("i=%d,(%d,%d,%d,%d)",0,left,top,right,bottom));
+            Log.i(TAG, String.format("i=%d,(%d,%d,%d,%d)", 0, left, top, right, bottom));
             getChildAt(0).layout(left, top, right, bottom);
-        }
-        else if(childCount==4){
-            for (int index = 0; index < childCount; index++)
-            {
+        } else if (childCount == 4) {
+            for (int index = 0; index < childCount; index++) {
                 View childrenView = getChildAt(index);
-                int tmpIdx=index;
-                if(index>=2){
+                int tmpIdx = index;
+                if (index >= 2) {
                     tmpIdx++;
                 }
                 int rowNum = tmpIdx / mColumnCount;
@@ -180,13 +167,11 @@ public class NineGridView extends ViewGroup
                 int top = (mImageHeight + mSpaceSize) * rowNum + paddingTop;
                 int right = left + mImageWidth;
                 int bottom = top + mImageHeight;
-                Log.i(TAG,String.format("i=%d,(%d,%d,%d,%d)",index,left,top,right,bottom));
+                Log.i(TAG, String.format("i=%d,(%d,%d,%d,%d)", index, left, top, right, bottom));
                 childrenView.layout(left, top, right, bottom);
             }
-        }
-        else{
-            for (int index = 0; index < childCount; index++)
-            {
+        } else {
+            for (int index = 0; index < childCount; index++) {
                 View childrenView = getChildAt(index);
                 int rowNum = index / mColumnCount;
                 int columnNum = index % mColumnCount;
@@ -200,8 +185,7 @@ public class NineGridView extends ViewGroup
     }
 
     @Override
-    protected void onFinishInflate()
-    {
+    protected void onFinishInflate() {
         super.onFinishInflate();
         setDataList(null);
     }
@@ -209,12 +193,10 @@ public class NineGridView extends ViewGroup
     /**
      * Set data source
      */
-    public void setDataList(List<NineGridBean> dataList)
-    {
+    public void setDataList(List<NineGridBean> dataList) {
         mDataList.clear();
         //Not allowed to exceed the maximum number
-        if (dataList != null && dataList.size() > 0)
-        {
+        if (dataList != null && dataList.size() > 0) {
             if (dataList.size() <= mMaxNum)
                 mDataList.addAll(dataList);
             else
@@ -229,8 +211,7 @@ public class NineGridView extends ViewGroup
     /**
      * Add data source
      */
-    public void addDataList(List<NineGridBean> dataList)
-    {
+    public void addDataList(List<NineGridBean> dataList) {
         if (mDataList.size() >= mMaxNum)
             return;
         //Not allowed to exceed the maximum number
@@ -247,20 +228,16 @@ public class NineGridView extends ViewGroup
     }
 
     //calculate the count of raw and column
-    private void calRawAndColumn()
-    {
+    private void calRawAndColumn() {
         int childSize = mDataList.size();
         //Increase the data size to display plus button in edit mode
 
         //calculate the raw count
-        if (childSize == 0)
-        {
+        if (childSize == 0) {
             mRawCount = 0;
-        } else if (childSize <= mColumnCount)
-        {
+        } else if (childSize <= mColumnCount) {
             mRawCount = 1;
-        } else
-        {
+        } else {
             if (childSize % mColumnCount == 0)
                 mRawCount = childSize / mColumnCount;
             else
@@ -288,12 +265,12 @@ public class NineGridView extends ViewGroup
             // fix the problem of View.post() method which will not excute
             // when the view has not attached to the window
             // ref: https://blog.csdn.net/xavier__s/article/details/50260981
-            AttachImageRunnable runnable=new AttachImageRunnable(
-                    imageContainer,gridBean,position,getContext());
-            if(imageContainer.getAttached()){
+            AttachImageRunnable runnable = new AttachImageRunnable(
+                    imageContainer, gridBean, position, getContext());
+            if (imageContainer.getAttached()) {
                 imageContainer.post(runnable);
-            }else{
-                Handler handler=new Handler();
+            } else {
+                Handler handler = new Handler();
                 handler.post(runnable);
             }
         }
@@ -301,7 +278,7 @@ public class NineGridView extends ViewGroup
         requestLayout();
     }
 
-    private class AttachImageRunnable implements Runnable{
+    private class AttachImageRunnable implements Runnable {
 
         private NineGirdImageContainer imageContainer;
         private NineGridBean gridBean;
@@ -321,7 +298,7 @@ public class NineGridView extends ViewGroup
             if (mImageLoader != null) {
                 if (imageContainer.getImageWidth() != 0 && imageContainer.getImageWidth() != 0)
                     mImageLoader.displayNineGridImage(getContext(), gridBean.getThumbUrl(),
-                            imageContainer.getImageView(), Common.IMG_THUMB_SCALRE, position);
+                            imageContainer.getImageView(), Constants.IMG_THUMB_SCALRE, position);
                 else
                     mImageLoader.displayNineGridImage(getContext(), gridBean.getThumbUrl(),
                             imageContainer.getImageView(), position);
@@ -335,24 +312,23 @@ public class NineGridView extends ViewGroup
     /**
      * Set up imageloader
      */
-    public void setImageLoader(INineGridImageLoader loader)
-    {
+    public void setImageLoader(INineGridImageLoader loader) {
         this.mImageLoader = loader;
     }
 
     /**
      * Whether has set imageloader
+     *
      * @return
      */
-    public boolean hasImageLoader(){
-        return this.mImageLoader!=null;
+    public boolean hasImageLoader() {
+        return this.mImageLoader != null;
     }
 
     /**
      * Set column count
      */
-    public void setColumnCount(int columnCount)
-    {
+    public void setColumnCount(int columnCount) {
         this.mColumnCount = columnCount;
         calRawAndColumn();
         requestLayout();
@@ -361,16 +337,14 @@ public class NineGridView extends ViewGroup
     /**
      * Set the maximum number
      */
-    public void setMaxNum(int maxNum)
-    {
+    public void setMaxNum(int maxNum) {
         this.mMaxNum = maxNum;
     }
 
     /**
      * Set the space size, dip unit
      */
-    public void setSpcaeSize(int dpValue)
-    {
+    public void setSpcaeSize(int dpValue) {
         this.mSpaceSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpValue
                 , getContext().getResources().getDisplayMetrics());
     }
@@ -378,58 +352,56 @@ public class NineGridView extends ViewGroup
     /**
      * Set the size of imageview while there has only one image, dip unit
      */
-    public void setSingleImageSize(int dpValue)
-    {
-        this.mSingleImageSize = Common.getDisplayDipSize(dpValue,getContext());
+    public void setSingleImageSize(int dpValue) {
+        this.mSingleImageSize = Common.getDisplayDipSize(dpValue, getContext());
     }
 
     /**
      * set the layout max width, dip unit
+     *
      * @param maxWidth
      */
-    public void setLayoutMaxWidth(int maxWidth){
-        this.mLayoutMaxWidth=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, maxWidth
+    public void setLayoutMaxWidth(int maxWidth) {
+        this.mLayoutMaxWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, maxWidth
                 , getContext().getResources().getDisplayMetrics());
     }
 
     /**
      * Set the aspect ratio of only one imageview
      */
-    public void setSingleImageRatio(float ratio)
-    {
+    public void setSingleImageRatio(float ratio) {
         this.mSingleImageRatio = ratio;
     }
 
     //clear all views
-    private void clearAllViews()
-    {
+    private void clearAllViews() {
         removeAllViews();
     }
 
     /**
      * Get data source
      */
-    public List<NineGridBean> getDataList()
-    {
+    public List<NineGridBean> getDataList() {
         return mDataList;
     }
 
     /**
      * Get data source size
+     *
      * @return
      */
-    public int getDataSize(){return mDataList.size();}
+    public int getDataSize() {
+        return mDataList.size();
+    }
 
     /**
      * Set up child view click listener
      */
-    public void setOnItemClickListener(onItemClickListener l)
-    {
+    public void setOnItemClickListener(onItemClickListener l) {
         this.mListener = l;
     }
 
-    public interface onItemClickListener
-    {
+    public interface onItemClickListener {
         /**
          * Callback when image be clicked
          *
@@ -454,8 +426,7 @@ public class NineGridView extends ViewGroup
      ****************************************************************/
 
     @Override
-    protected Parcelable onSaveInstanceState()
-    {
+    protected Parcelable onSaveInstanceState() {
         SavedViewState ss = new SavedViewState(super.onSaveInstanceState());
         ss.singleImageSize = mSingleImageSize;
         ss.singleImageRatio = mSingleImageRatio;
@@ -463,16 +434,14 @@ public class NineGridView extends ViewGroup
         ss.columnCount = mColumnCount;
         ss.rawCount = mRawCount;
         ss.maxNum = mMaxNum;
-        ss.layoutMaxWidth=mLayoutMaxWidth;
+        ss.layoutMaxWidth = mLayoutMaxWidth;
         ss.dataList = mDataList;
         return ss;
     }
 
     @Override
-    protected void onRestoreInstanceState(Parcelable state)
-    {
-        if (!(state instanceof SavedViewState))
-        {
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (!(state instanceof SavedViewState)) {
             super.onRestoreInstanceState(state);
             return;
         }
@@ -485,12 +454,11 @@ public class NineGridView extends ViewGroup
         mColumnCount = ss.columnCount;
         mRawCount = ss.rawCount;
         mMaxNum = ss.maxNum;
-        mLayoutMaxWidth=ss.layoutMaxWidth;
+        mLayoutMaxWidth = ss.layoutMaxWidth;
         setDataList(ss.dataList);
     }
 
-    static class SavedViewState extends BaseSavedState
-    {
+    static class SavedViewState extends BaseSavedState {
         int singleImageSize;
         float singleImageRatio;
         int spaceSize;
@@ -502,13 +470,11 @@ public class NineGridView extends ViewGroup
         int icAddMoreResId;
         List<NineGridBean> dataList;
 
-        SavedViewState(Parcelable superState)
-        {
+        SavedViewState(Parcelable superState) {
             super(superState);
         }
 
-        private SavedViewState(Parcel source)
-        {
+        private SavedViewState(Parcel source) {
             super(source);
             singleImageSize = source.readInt();
             singleImageRatio = source.readFloat();
@@ -516,15 +482,14 @@ public class NineGridView extends ViewGroup
             columnCount = source.readInt();
             rawCount = source.readInt();
             maxNum = source.readInt();
-            layoutMaxWidth=source.readInt();
+            layoutMaxWidth = source.readInt();
             isEditMode = source.readByte() == (byte) 1;
             icAddMoreResId = source.readInt();
             dataList = source.readArrayList(NineGridBean.class.getClassLoader());
         }
 
         @Override
-        public void writeToParcel(Parcel out, int flags)
-        {
+        public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeInt(singleImageSize);
             out.writeFloat(singleImageRatio);
@@ -538,17 +503,14 @@ public class NineGridView extends ViewGroup
             out.writeList(dataList);
         }
 
-        public static final Parcelable.Creator<SavedViewState> CREATOR = new Creator<SavedViewState>()
-        {
+        public static final Parcelable.Creator<SavedViewState> CREATOR = new Creator<SavedViewState>() {
             @Override
-            public SavedViewState createFromParcel(Parcel source)
-            {
+            public SavedViewState createFromParcel(Parcel source) {
                 return new SavedViewState(source);
             }
 
             @Override
-            public SavedViewState[] newArray(int size)
-            {
+            public SavedViewState[] newArray(int size) {
                 return new SavedViewState[size];
             }
         };

@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WeChatMoment.iml" filepath="$PROJECT_DIR$/WeChatMoment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WeChatMoment.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WeChatMoment.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lrecyclerview/WeChatMoment.lrecyclerview.iml" filepath="$PROJECT_DIR$/.idea/modules/lrecyclerview/WeChatMoment.lrecyclerview.iml" />
     </modules>
   </component>
 </project>

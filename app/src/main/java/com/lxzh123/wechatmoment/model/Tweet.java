@@ -3,15 +3,13 @@ package com.lxzh123.wechatmoment.model;
 import com.lxzh123.wechatmoment.utils.Common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * description: 朋友圈状态
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class Tweet {
+public class Tweet extends BaseBean{
     /**
      * 发状态用户
      */
@@ -23,7 +21,7 @@ public class Tweet {
     /**
      * 状态附图(数量:0-9),可选
      */
-    private List<String> images;
+    private List<TweetImage> images;
     /**
      * 状态评论(数量：不限),可选
      */
@@ -45,11 +43,11 @@ public class Tweet {
         this.content = content;
     }
 
-    public List<String> getImages() {
+    public List<TweetImage> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<TweetImage> images) {
         this.images = images;
     }
 
@@ -61,19 +59,14 @@ public class Tweet {
         this.comments = comments;
     }
 
-    /**
-     * 用于SimpleAdpater绑定List<Map<String xxx,Object obj>>的标签文本
-     */
-    public final static String TWEET_COMMENT_TAG="COMMENT_TAG";
-
     public Tweet() {
         this.sender = new User();
         this.content = "";
-        this.images = new ArrayList<String>();
+        this.images = new ArrayList<TweetImage>();
         this.comments = new ArrayList<Comment>();
     }
 
-    public Tweet(User sender, String content, List<String> images, List<Comment> comments) {
+    public Tweet(User sender, String content, List<TweetImage> images, List<Comment> comments) {
         this.sender = sender;
         this.content = content;
         this.images = images;
@@ -82,9 +75,10 @@ public class Tweet {
 
     /**
      * tweet which does not contain a content and images considered as an empty tweet
+     *
      * @return true: empty tweet false: non-empty tweet
      */
-    public boolean IsEmptyTweet() {
+    public boolean isEmptyTweet() {
         return Common.isNullOrEmpty(content) && images.size() == 0;
     }
 }

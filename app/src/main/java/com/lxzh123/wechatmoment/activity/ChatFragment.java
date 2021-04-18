@@ -1,10 +1,11 @@
 package com.lxzh123.wechatmoment.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.lxzh123.wechatmoment.R;
 
@@ -12,7 +13,7 @@ import com.lxzh123.wechatmoment.R;
  * A fragment representing a list of Items.
  * <p/>
  */
-public class ChatFragment extends Fragment{
+public class ChatFragment extends Fragment {
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

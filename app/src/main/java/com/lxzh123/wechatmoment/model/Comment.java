@@ -2,9 +2,9 @@ package com.lxzh123.wechatmoment.model;
 
 /**
  * description: 朋友圈状态评论
- * author:      Created by a1239848066 on 2018/5/20.
+ * author:      Created by lxzh on 2021/4/18.
  */
-public class Comment {
+public class Comment extends BaseBean{
     /**
      * 评论内容
      */
