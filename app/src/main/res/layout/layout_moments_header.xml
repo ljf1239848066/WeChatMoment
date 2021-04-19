@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="false">
+
+    <RelativeLayout
+        android:id="@+id/layout_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp">
+
+        <ImageView
+            android:id="@+id/iv_header_back"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="-30dp"
+            android:layout_marginBottom="30dp"
+            android:fadingEdge="none"
+            android:focusable="false"
+            android:paddingBottom="30dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/moment_bg" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_refresh"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="-30dp"
+        android:src="@drawable/moment_refresh" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/iv_self_portrait"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/potral" />
+
+        <TextView
+            android:id="@+id/tv_self_nick"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_self_portrait"
+            android:gravity="center"
+            android:text="TestID"
+            android:textColor="@color/title_bar_text"
+            android:textSize="@dimen/title_bar_text_size" />
+
+    </RelativeLayout>
+</RelativeLayout>

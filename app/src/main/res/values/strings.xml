@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WeChatMoment</string>
+    <string name="main_tab_chat">WeChat</string>
+    <string name="main_tab_contact">Contact</string>
+    <string name="main_tab_find">Find</string>
+    <string name="main_tab_me">Me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_moment">MomentActivity</string>
+    <string name="title_activity_image_viewer_pager">ImageViewer</string>
+
+    <string name="tweet_hint_nickname">User nickname</string>
+    <string name="tweet_hint_text_content_long">这是一条测试用朋友圈，内容也没有啥意义，仅仅用于查看显示状态与布局效果，内容很长很长很长，因为我在这里塞了一些没用的文字，很啰嗦很啰嗦，虽然不知道写些什么好，但还是勉强凑一些字数，比如巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻巴拉巴拉巴拉哈哈哈呵呵呵哟哟嘻嘻</string>
+    <string name="title_activity_personal_info">PersonalInfo</string>
+
+    <string name="find_moment">moment</string>
+    <string name="find_scan">scan</string>
+    <string name="find_shake">shake</string>
+    <string name="find_nearpeople">near poeple</string>
+    <string name="find_bottom">current bottle</string>
+    <string name="find_shopping">shopping</string>
+    <string name="find_game">game</string>
+
+</resources>

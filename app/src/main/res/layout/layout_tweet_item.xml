@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/tweet_item_margin">
+
+    <ImageView
+        android:id="@+id/iv_tweet_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:contentDescription="User avatar"
+        android:scaleType="fitXY"
+        android:src="@drawable/potral" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/iv_tweet_avatar"
+        android:layout_toRightOf="@id/iv_tweet_avatar"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/tweet_item_margin"
+        android:paddingRight="@dimen/tweet_item_margin"
+        android:paddingBottom="@dimen/tweet_item_margin">
+
+        <TextView
+            android:id="@+id/tv_tweet_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/tweet_item_margin"
+            android:text="@string/tweet_hint_nickname"
+            android:textColor="@color/tweet_nickname_color"
+            android:textSize="@dimen/tweet_text_size" />
+
+        <TextView
+            android:id="@+id/tv_tweet_text_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tweet_hint_text_content_long"
+            android:textAlignment="gravity"
+            android:textColor="@color/tweet_text_content_color"
+            android:textSize="@dimen/tweet_text_size" />
+
+        <com.lxzh123.wechatmoment.view.ninegridview.NineGridView
+            android:id="@+id/gv_tweet_image_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:scaleType="centerCrop">
+
+        </com.lxzh123.wechatmoment.view.ninegridview.NineGridView>
+
+        <com.lxzh123.wechatmoment.view.CommentListView
+            android:id="@+id/lv_tweet_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tweet_comment_bg"
+            android:divider="@null">
+
+        </com.lxzh123.wechatmoment.view.CommentListView>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
